@@ -58,7 +58,7 @@ simlabxray/
 └── __history/                         # Delphi backup versions
 ```
 
-[Proposed Migration Scaffold Structure](Delphi_Migration_Scaffold.md)
+[Proposed Migration Scaffold Structure](\docs\Delphi_Migration_Scaffold.md)
 
 ## Getting Started
 
@@ -75,7 +75,7 @@ simlabxray/
 
 ### Running the Application
 1. Ensure a TWAIN device is installed and working
-2. Configure SSH keys in the `ssh_keys/` directory (see [Image_Upload_README.md](Image_Upload_README.md))
+2. Configure SSH keys in the `ssh_keys/` directory (see [Image_Upload_README.md](\docs\Image_Upload_README.md))
 3. Launch `simlabxray.exe`
 4. Select imaging device from available sources
 5. Capture image and configure upload parameters
@@ -84,7 +84,7 @@ simlabxray/
 ## Configuration
 
 ### Image Upload Setup
-Complete setup instructions including SSH key configuration, server-side requirements, and troubleshooting are documented in [Image_Upload_README.md](Image_Upload_README.md).
+Complete setup instructions including SSH key configuration, server-side requirements, and troubleshooting are documented in [Image_Upload_README.md](docs\Image_Upload_README.md).
 
 ### Key Configuration Parameters
 - **TWAIN Device Selection**: Choose from available imaging sources in the application UI
@@ -99,16 +99,16 @@ Complete setup instructions including SSH key configuration, server-side require
 - Windows 10/11 compatible
 
 ### Architecture & Refactoring
-The current project has a flat structure. For a more maintainable, modern architecture suitable for Delphi migration, see [Delphi_Migration_Scaffold.md](Delphi_Migration_Scaffold.md), which proposes layered architecture patterns and a recommended migration path.
+The current project has a flat structure. For a more maintainable, modern architecture suitable for Delphi migration, see [Delphi_Migration_Scaffold.md](\docs\Delphi_Migration_Scaffold.md), which proposes layered architecture patterns and a recommended migration path.
 
 ### Migration Path
-For information about upgrading to newer Delphi versions, see [Delphi_Migration_Notes.md](Delphi_Migration_Notes.md).
+For information about upgrading to newer Delphi versions, see [Delphi_Migration_Notes.md](\docs\Delphi_Migration_Notes.md).
 
 ## Documentation
 
-- **[Image_Upload_README.md](Image_Upload_README.md)** - Complete SFTP upload configuration guide
-- **[Delphi_Migration_Notes.md](Delphi_Migration_Notes.md)** - Version upgrade considerations
-- **[Proposed Migration Scaffold Structure](Delphi_Migration_Scaffold.md)** - Architextural Structuring Option
+- **[Image_Upload_README.md](\docs\Image_Upload_README.md)** - Complete SFTP upload configuration guide
+- **[Delphi_Migration_Notes.md](\docs\Delphi_Migration_Notes.md)** - Version upgrade considerations
+- **[Proposed Migration Scaffold Structure](\docs\Delphi_Migration_Scaffold.md)** - Architextural Structuring Option
 
 ## Support & Development
 
