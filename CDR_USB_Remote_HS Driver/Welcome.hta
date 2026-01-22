@@ -1,0 +1,157 @@
+<html>
+
+<head>
+    <HTA:APPLICATION 
+     APPLICATIONNAME="CDR USB Remote HS Driver Installation"  
+     MAXIMIZEBUTTON="yes"
+     MINIMIZEBUTTON="yes"
+     SINGLEINSTANCE="yes"
+     NAVIGABLE="yes"
+     SCROLL="yes" />
+
+
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="VI60_defaultClientScript" content="VBScript">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>CDR USB Remote HS Driver Installation</title>
+<style>
+<!--
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	}
+div.Section1
+	{page:Section1;}
+h3
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:13.5pt;
+	font-family:"Times New Roman";
+	font-weight:bold}
+h4
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Arial";
+	font-weight:bold}
+p.NormalWebNumbered
+	{margin-right:0in;
+	margin-left:56.25pt;
+	text-indent:-.25in;
+	line-height:200%;
+	tab-stops:list 56.25pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	}
+-->
+    </style>
+
+<script language="javascript">
+
+	// Set the fixed window size.
+	var startWindowWidth  = 720;
+	var startWindowHeight = 720;
+	var startWindowLeft   = 200;
+	var startWindowTop    = 100;
+
+	// Check if the screen size info is available.
+	if (window.screen)
+	{
+		// Calculate the real default window location.
+		startWindowLeft = (window.screen.availWidth - startWindowWidth) / 2;
+		startWindowTop  = (window.screen.availHeight - startWindowHeight) / 2;
+	}
+
+	// Center the start window on the screen.
+	window.moveTo(startWindowLeft, startWindowTop);
+	window.resizeTo(startWindowWidth, startWindowHeight);
+
+    </script>
+
+   <SCRIPT LANGUAGE="JavaScript">
+		function runmsi(obj, strPathMsi)
+		{			
+			var objFSO = new ActiveXObject("Scripting.FileSystemObject");
+			var strPath = unescape(document.location.pathname);
+  			var file = objFSO.GetFile(strPath);
+ 			var strLoc = file.ParentFolder;
+ 			
+			var objShell = new ActiveXObject("WScript.Shell");
+			var strCmd = "msiexec -i \"" + strLoc + "\\" + strPathMsi + "\"";
+
+			// launch it
+			var lngReturn = objShell.Run (strCmd, 1, 1);
+			objShell = null;
+		}
+				
+		function runexe(obj, strPathExe)
+		{			
+			var objFSO = new ActiveXObject("Scripting.FileSystemObject");
+			var strPath = unescape(document.location.pathname);
+  			var file = objFSO.GetFile(strPath);
+ 			var strLoc = file.ParentFolder;
+ 			
+			var objShell = new ActiveXObject("WScript.Shell");
+			var strCmd = "\"" + strLoc + "\\" + strPathExe + "\"";
+
+			// launch it
+			var lngReturn = objShell.Run (strCmd, 1, 1);
+			objShell = null;
+		}
+				
+	 </SCRIPT>
+
+
+     <SCRIPT FOR="cmdInstall" EVENT="onclick" LANGUAGE="javascript">
+		runexe(this, "CDR USB Remote HS Driver Setup.exe");
+	</script>
+    
+
+ </head>
+
+<body>
+
+<h3><font face="Verdana">CDR USB Remote HS Driver Installation</font></h3>
+  
+<hr size="1" width="100%" align="left" noshade>
+
+<div class="Section1">
+  <h4>Introduction</h4>
+  <p><font face="Arial">On this page you will be able to install the driver for your CDR USB Remote HS 
+  interface. </font> </p>
+  
+  <h4>Compatibility and Software Installation</h4>
+  <p><font face="Arial">To install this software, make sure that you have one of the following 
+  supported operating systems, then click the install button, which will guide you through 
+  the installation process.</font></p>
+	<ul>
+		<li class="style1"><font size="2" face="Arial">Windows 7 and Windows 7 x64 <i>(Home Premium, Professional, or Ultimate)</i></font></li>
+		<li class="style1"><font size="2" face="Arial">Windows Vista <i>(Service Pack 2) </i> and Vista x64 <i>(Home Premium, Business, or Ultimate)</i></font></li>
+		<li class="style1"><font size="2" face="Arial">Windows XP Professional <i>(Service Pack 3)</i> and XP Professional x64</font></li>
+	</ul></p>
+<p>
+ 
+           <BUTTON ID="cmdInstall" STYLE="width: 250px; position: relative; top: 0; left"> 
+           Install CDR USB Remote HS Driver</BUTTON>
+
+ </p>
+  
+   <font face="Arial">
+  
+   <font size="1">Copyright (c) 2012, Schick Technologies, Inc. All Rights Reserved.</font>
+   <br>
+   
+   <font size="1">(Version 5.3.42.5213)</font>
+
+  
+	</font>
+  
+</div>
+
+</body>
+
+</html>
