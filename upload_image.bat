@@ -1,6 +1,14 @@
 @echo off
 setlocal enabledelayedexpansion
 
+REM DEBUG: Log that batch file was called
+echo %date% %time% BATCH FILE CALLED - Args: %* >> "%TEMP%\upload_debug.log"
+echo %date% %time% Arg 1 [%~1] >> "%TEMP%\upload_debug.log"
+echo %date% %time% Arg 2 [%~2] >> "%TEMP%\upload_debug.log"
+echo %date% %time% Current Directory: %CD% >> "%TEMP%\upload_debug.log"
+
+REM ============================================================================
+REM  UPLOAD_IMAGE.BAT - X-Ray Image Upload Automation Script
 REM ============================================================================
 REM  UPLOAD_IMAGE.BAT - X-Ray Image Upload Automation Script
 REM ============================================================================
@@ -88,13 +96,36 @@ REM        remote directory permission issue (code passed from PSFTP)
 REM
 REM ============================================================================
 
+@echo off
+setlocal EnableExtensions EnableDelayedExpansion
+
 REM Args:
 REM   %1 = path to .ssh directory (contains private key and known_hosts)
 REM   %2 = target filename for remote server (e.g., S9999-2026-01-21.jpg)
 
+REM Delphi passes:
+REM   %1 = C:\Users\svc-dentappsnd-sftp\.ssh
+REM   %2 = remote filename
+
 set "SSH_DIR=%~1"
 set "REMOTE_FILENAME=%~2"
-set "LOCAL_FILE=xray.jpg"
+
+REM Always resolve paths relative to this batch file
+set "SCRIPT_DIR=%~dp0"
+set "LOCAL_FILE=%SCRIPT_DIR%xray.jpg"
+
+set "LOGFILE=%TEMP%\upload_image.log"
+
+if "%SSH_DIR%"=="" (
+  echo [ERROR] SSH_DIR missing>>"%LOGFILE%"
+  exit /b 1
+)
+
+if "%REMOTE_FILENAME%"=="" (
+  echo [ERROR] REMOTE_FILENAME missing>>"%LOGFILE%"
+  exit /b 2
+)
+
 set "USER=svc-dentappsnd-sftp"
 set "HOST=vs-dentappprod.marqnet.mu.edu"
 set "REMOTE_ROOT=/opt/dental/MusodDjango/media/xrays"
@@ -172,7 +203,7 @@ exit /b 0
 :alert
 rem Surface an alert on the client for visibility
 if exist "%SystemRoot%\System32\mshta.exe" (
-  "%SystemRoot%\System32\mshta.exe" "javascript:alert('%~1');close()" >nul 2>&1
+  start "" /wait "%SystemRoot%\System32\mshta.exe" "javascript:var sh=new ActiveXObject('WScript.Shell');sh.Popup('%~1',0,'X-Ray Upload',64);close()"
 ) else (
   echo [ALERT] %~1
 )

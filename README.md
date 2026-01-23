@@ -40,7 +40,7 @@ This application is designed for dental imaging workflows where:
 | **Key Libraries** | Indy (network), JPEG imaging, DelphiTwain |
 
 ## Project Structure
-(Note exhaustive)
+(NOT exhaustive)
 
 ```
 simlabxray/

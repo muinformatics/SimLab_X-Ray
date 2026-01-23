@@ -90,4 +90,6 @@ Win64/Release/
 # CDRIntraoralTwainSetup/
 # CDR_USB_Remote_HS Driver/
 
+_legacy/
+
 # End of https://www.toptal.com/developers/gitignore/api/delphi

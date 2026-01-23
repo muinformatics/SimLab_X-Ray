@@ -37,6 +37,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure WriteLog(fname:string);
     procedure SaveAsJpg(fname:string);
+    procedure ExecuteBatchFile(BatchFilePath: string; Parameters: string);
     procedure FetchData;
     procedure FormCreate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -145,7 +146,7 @@ begin
     writelog('Upload: '+fname);
 
     param1 := '"C:\Users\svc-dentappsnd-sftp\.ssh" "'+fname+'"';
-    ShellExecute(0, 'open', PChar('upload_image.bat'), PChar(param1), '', SW_SHOWNORMAL);
+    ExecuteBatchFile(GetCurrentDir + '\upload_image.bat', param1);
 
     button1.Enabled:=false;
     ImgHolder.Visible:=True;
@@ -188,7 +189,7 @@ var
   param1 : string;
 begin
     param1 := '"C:\Users\svc-dentappsnd-sftp\.ssh" "S9999.jpg"';
-    ShellExecute(0, 'open', PChar('upload_image.bat'), PChar(param1), '', SW_SHOWNORMAL);
+    ExecuteBatchFile(GetCurrentDir + '\upload_image.bat', param1);
 end;
 
 procedure TForm1.ComboBox1Change(Sender: TObject);
@@ -329,6 +330,31 @@ begin
   ImgHolder.Picture.Assign(Image);
   //ImgHolder.Picture.LoadFromFile('xray.jpg');
   Cancel := True;//Only want one image
+end;
+
+procedure TForm1.ExecuteBatchFile(BatchFilePath: string; Parameters: string);
+var
+  SEInfo: TShellExecuteInfo;
+  ExitCode: DWORD;
+begin
+  FillChar(SEInfo, SizeOf(SEInfo), 0);
+  SEInfo.cbSize := SizeOf(TShellExecuteInfo);
+  with SEInfo do begin
+    fMask := SEE_MASK_NOCLOSEPROCESS;
+    Wnd := Application.Handle;
+    lpFile := PChar(BatchFilePath);
+    lpParameters := PChar(Parameters);
+    lpDirectory := PChar(GetCurrentDir);
+    nShow := SW_SHOWNORMAL;
+  end;
+  if ShellExecuteEx(@SEInfo) then begin
+    repeat
+      Application.ProcessMessages;
+      GetExitCodeProcess(SEInfo.hProcess, ExitCode);
+    until (ExitCode <> STILL_ACTIVE) or Application.Terminated;
+  end else begin
+    ShowMessage('Error executing upload_image.bat: ' + SysErrorMessage(GetLastError));
+  end;
 end;
 
 procedure TForm1.SaveAsJpg(fname:string);
