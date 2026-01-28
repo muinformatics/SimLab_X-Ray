@@ -127,3 +127,42 @@ This project was inherited from a previous developer. Key maintainers should:
 - TWAIN library is dynamically loaded to prevent hangs if devices are unavailable
 - Application supports both VCL and FMX frameworks (FMX variants available in code)
 - Comprehensive logging enables audit trails for compliance requirements
+
+## Operational Requirements
+
+### Required presence of the log file (log.txt)
+A log.txt file must be in existance in the root directory along with the .exe file.
+Its absence with generate a "file not found" error message and halt the upload process.
+
+### Student List Data File (simlablist.csv)
+
+The application requires a CSV file (`simlablist.csv`) containing the current student roster with their card numbers and producer codes for the scanner. This file is **required** for the application to function properly.
+
+#### File Generation & Placement
+
+1. **Generate the file** using the server-side script: `generate_simlab_student_list_csv.py`
+   - Located on the main server
+   - Takes one required parameter: the graduating year of the student class (e.g., `2028`)
+   - Example: `python generate_simlab_student_list_csv.py 2028`
+
+2. **Deploy the generated file** to the S drive:
+   - **Path**: `S:\Delphi\simlabxrays\simlablist.csv`
+   - This location must be accessible to the workstation running this application
+
+#### File Contents
+
+The CSV file contains five columns:
+- Card number (for scanner identification)
+- Producer code (facility/location identifier)
+- Student full name (last, first)
+- Student last name
+- Student first name
+
+In addition to the student records, 5 additional "Test" records are added for temp card usage
+- Simlab Card A - Simlab Card #
+
+#### Maintenance
+
+- Regenerate and update `simlablist.csv` annually or as needed when student cohorts change
+- Ensure the S drive path remains accessible to all workstations running this application
+- Store historical versions of the file if audit trail is required
